@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi tienda</title>
+  <style>
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a14, #11112b, #090912);
+      color: #f5f5f5;
+      padding: 20px;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* Título principal */
+
+    h1 {
+      color: #00e5ff;
+      font-size: 34px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+    }
+
+    .slogan {
+      color: #c7c7d9;
+      font-size: 17px;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    /* Beneficios de la tienda */
+
+    .beneficios {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+
+      background: linear-gradient(90deg, #15152e, #24245a);
+      color: white;
+
+      padding: 16px;
+      margin-bottom: 35px;
+
+      border-top: 1px solid #00e5ff;
+      border-bottom: 1px solid #7c4dff;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+    }
+
+    .beneficios span {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Catálogo */
+
+    #productos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .producto {
+      border: 1px solid #29295a;
+      background: #151522;
+      border-radius: 12px;
+      padding: 12px;
+      width: 220px;
+
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.45);
+
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .producto:hover {
+      transform: translateY(-7px);
+      box-shadow:
+        0 0 15px rgba(0, 229, 255, 0.35),
+        0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .producto img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .producto h3 {
+      color: #ffffff;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .descripcion {
+      font-size: 14px;
+      color: #aaaac0;
+      min-height: 42px;
+    }
+
+    .precio {
+      font-size: 20px;
+      font-weight: bold;
+      color: #00e5ff;
+      text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+    }
+
+    /* Botones de productos */
+
+    .producto button {
+      background: linear-gradient(90deg, #007bff, #7c4dff);
+      border: none;
+      color: white;
+
+      padding: 10px 14px;
+      margin-top: 5px;
+
+      border-radius: 6px;
+      cursor: pointer;
+
+      font-weight: bold;
+
+      transition: 0.2s ease;
+    }
+
+    .producto button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+    }
+
+    /* Carrito */
+
+    .carrito {
+      margin-top: 45px;
+      padding: 25px;
+
+      background: #151522;
+
+      border: 1px solid #29295a;
+      border-radius: 12px;
+
+      text-align: left;
+      display: inline-block;
+
+      min-width: 320px;
+
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .carrito h2 {
+      margin-top: 0;
+      color: #00e5ff;
+    }
+
+    #lista-carrito {
+      padding-left: 20px;
+    }
+
+    #lista-carrito li {
+      margin-bottom: 8px;
+      color: #dddded;
+    }
+
+    .resumen {
+      border-top: 1px solid #303050;
+      margin-top: 15px;
+      padding-top: 10px;
+    }
+
+    .total {
+      font-size: 21px;
+      font-weight: bold;
+      color: #00e5ff;
+    }
+
+    /* Botón vaciar */
+
+    .vaciar {
+      background-color: #e53935;
+      border: none;
+      color: white;
+
+      padding: 10px 14px;
+      margin-top: 10px;
+
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+
+      transition: 0.2s ease;
+    }
+
+    .vaciar:hover {
+      background-color: #ff5252;
+      transform: scale(1.03);
+    }
+
+    /* Botón finalizar */
+
+    .finalizar {
+      background: linear-gradient(90deg, #00c853, #00e676);
+      border: none;
+      color: #07140b;
+
+      padding: 10px 14px;
+      margin-top: 10px;
+      margin-left: 5px;
+
+      border-radius: 6px;
+      cursor: pointer;
+
+      font-weight: bold;
+
+      transition: 0.2s ease;
+    }
+
+    .finalizar:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+    }
+
+    /* Adaptación para celulares */
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 12px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .beneficios {
+        gap: 12px;
+      }
+
+      .producto {
+        width: 90%;
+        max-width: 300px;
+      }
+
+      .carrito {
+        width: 90%;
+        min-width: unset;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 JOHN GAMER - Tienda de Videojuegos</h1>
+
+  <p class="slogan">
+    Tu mundo gamer comienza aquí 🕹️
+  </p>
+
+  <div class="beneficios">
+    <span>🚚 Envíos en Bogotá</span>
+    <span>🔒 Compra segura</span>
+    <span>🎮 Juegos para todos</span>
+  </div>
+
+  <div id="productos"></div>
+
+  <div class="carrito">
+    <h2>🛒 Carrito de Compras</h2>
+
+    <ul id="lista-carrito"></ul>
+
+    <div class="resumen">
+      <p>
+        Envío: <strong>Gratis</strong>
+      </p>
+
+      <p class="total">
+        Total: $<span id="total">0</span>
+      </p>
+    </div>
+
+    <button class="vaciar" onclick="vaciarCarrito()">
+      🧹 Vaciar Carrito
+    </button>
+
+    <button class="finalizar" onclick="finalizarCompra()">
+      🎮 Comprar Ahora
+    </button>
+  </div>
+
+  <script>
+    const productos = [
+      {
+        id: 1,
+        nombre: "🕷️ Marvel's Spider-Man: Miles Morales",
+        descripcion: "Vive la historia de Miles mientras aprende a dominar sus nuevos poderes y protege Nueva York. ¡Acción, aventura y mucho balanceo por la ciudad! 🕸️",
+        precio: 239000,
+        imagen: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/PRfYtTZQsuj3ALrBXGL8MjAH.jpg"
+      },
+      {
+        id: 2,
+        nombre: "🕷️ Marvel's Spider-Man Remastered",
+        descripcion: "Ponte en la piel de Spider-Man y protege Nueva York mientras enfrentas grandes enemigos y vives una emocionante aventura. 🕸️",
+        precio: 329000,
+        imagen: "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/AcjaXqwZzggGiKLFdEfHMp0H.png"
+      },
+      {
+        id: 3,
+        nombre: "⚽ EA SPORTS FC™ 27",
+        descripcion: "Vive la emoción del fútbol con tus equipos y jugadores favoritos. Compite, crea tu equipo y demuestra quién manda en la cancha. 🏆",
+        precio: 280000,
+        imagen: "https://image.api.playstation.com/vulcan/ap/rnd/202607/2322/1afbfc7ac6475a94d0e6aa302302b7e4fdefbf0a28ee1fa6.png"
+      },
+      {
+        id: 4,
+        nombre: "🌴 Grand Theft Auto VI",
+        descripcion: "Explora un mundo lleno de acción, crimen y aventuras en Vice City. Vive una historia emocionante mientras descubres todo lo que este mundo abierto tiene para ofrecer. 🚗💰",
+        precio: 325000,
+        imagen: "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png"
+      },
+      {
+        id: 5,
+        nombre: "🐺 Marvel’s Wolverine",
+        descripcion: "Ponte en la piel de Wolverine y desata sus garras en una aventura llena de acción, combates intensos y una historia brutal. ⚔️",
+        precio: 280000,
+        imagen: "https://image.api.playstation.com/vulcan/ap/rnd/202510/0721/0f8097282863ccd07abf4485a2bc733111127e628552207e.jpg"
+      }
+    ];
+
+
+    /* ==============================
+       CARRITO
+    ================================ */
+
+    const carrito = [];
+
+    const contenedorProductos = document.getElementById("productos");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total");
+
+
+    /* ==============================
+       MOSTRAR PRODUCTOS
+    ================================ */
+
+    function mostrarProductos() {
+
+      contenedorProductos.innerHTML = "";
+
+      productos.forEach(prod => {
+
+        const div = document.createElement("div");
+
+        div.className = "producto";
+
+        div.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}">
+
+          <h3>${prod.nombre}</h3>
+
+          <p class="descripcion">
+            ${prod.descripcion}
+          </p>
+
+          <p class="precio">
+            ${prod.precio.toLocaleString("es-CO", {
+              style: "currency",
+              currency: "COP",
+              minimumFractionDigits: 0
+            })}
+          </p>
+
+          <button onclick="agregarAlCarrito(${prod.id})">
+            Agregar al carrito
+          </button>
+        `;
+
+        contenedorProductos.appendChild(div);
+
+      });
+
+    }
+
+
+    /* ==============================
+       AGREGAR AL CARRITO
+    ================================ */
+
+    function agregarAlCarrito(id) {
+
+      const productoExistente =
+        carrito.find(p => p.id === id);
+
+      if (productoExistente) {
+
+        productoExistente.cantidad++;
+
+      } else {
+
+        const producto =
+          productos.find(p => p.id === id);
+
+        carrito.push({
+          ...producto,
+          cantidad: 1
+        });
+
+      }
+
+      actualizarCarrito();
+
+    }
+
+
+    /* ==============================
+       ACTUALIZAR CARRITO
+    ================================ */
+
+    function actualizarCarrito() {
+
+      listaCarrito.innerHTML = "";
+
+      let total = 0;
+      let totalItems = 0;
+
+      carrito.forEach(item => {
+
+        const li =
+          document.createElement("li");
+
+        const subtotal =
+          item.precio * item.cantidad;
+
+        li.textContent =
+          `${item.nombre} x${item.cantidad} — ` +
+          subtotal.toLocaleString("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+          });
+
+        listaCarrito.appendChild(li);
+
+        total += subtotal;
+        totalItems += item.cantidad;
+
+      });
+
+      totalCarrito.textContent =
+        total.toLocaleString("es-CO");
+
+      actualizarTituloCarrito(totalItems);
+
+    }
+
+
+    /* ==============================
+       CONTADOR DEL CARRITO
+    ================================ */
+
+    function actualizarTituloCarrito(cantidad) {
+
+      const titulo =
+        document.querySelector(".carrito h2");
+
+      titulo.textContent =
+        `🧾 Carrito de Compras (${cantidad})`;
+
+    }
+
+
+    /* ==============================
+       VACIAR CARRITO
+    ================================ */
+
+    function vaciarCarrito() {
+
+      if (carrito.length === 0) {
+
+        alert("🛒 El carrito ya está vacío.");
+
+        return;
+
+      }
+
+      if (
+        confirm(
+          "¿Estás seguro de que quieres vaciar el carrito?"
+        )
+      ) {
+
+        carrito.length = 0;
+
+        actualizarCarrito();
+
+      }
+
+    }
+
+
+    /* ==============================
+       FINALIZAR COMPRA
+    ================================ */
+
+    function finalizarCompra() {
+
+      if (carrito.length === 0) {
+
+        alert(
+          "🛒 Tu carrito está vacío. Agrega productos antes de finalizar la compra."
+        );
+
+        return;
+
+      }
+
+      alert(
+        "🎉 ¡Pedido simulado confirmado!\n\n" +
+        "En un eCommerce real, ahora entrarían en acción " +
+        "el backend, la pasarela de pago y la logística."
+      );
+
+      carrito.length = 0;
+
+      actualizarCarrito();
+
+    }
+
+
+    /* ==============================
+       INICIAR TIENDA
+    ================================ */
+
+    mostrarProductos();
+  </script>
+</body>
+</html>
